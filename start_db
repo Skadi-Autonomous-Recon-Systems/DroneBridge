@@ -24,7 +24,7 @@ function start_osd() {
   echo
   dos2unix -n /DroneBridge/osdconfig.txt /DroneBridge/osdconfig.txt
   echo
-  cd /home/pi/DroneBridge/osd
+  cd /home/$USER/DroneBridge/osd
   echo Building OSD:
   make -j2 || {
     echo -e "${RED}ERROR: Could not build OSD, check osdconfig.txt!${NC}"
@@ -42,7 +42,7 @@ function stop_db_modules() {
 
 function init_dronebridge() {
     logrotate -f /etc/logrotate.conf
-    /home/pi/DroneBridge/syslog_server/db_syslog_server &
+    /home/$USER/DroneBridge/syslog_server/db_syslog_server &
 
     if vcgencmd get_throttled | nice grep -q -v "0x0"; then
     TEMP=$(cat /sys/class/thermal/thermal_zone0/temp)
@@ -60,7 +60,7 @@ function init_dronebridge() {
 
   CAM=$(/usr/bin/vcgencmd get_camera | nice grep -c detected=1)
   echo "Building DroneBridge modules..."	# enables optimizations for specific targets
-  cd /home/pi/DroneBridge
+  cd /home/$USER/DroneBridge
   # Check for last compile target (may need to recompile to get advantage of NEON SIMD)
   CPU_ARCHITECTURE=$(uname -m)
   COMPILE_TARGET_FILE=.compile_target
@@ -79,18 +79,18 @@ function init_dronebridge() {
     uname -m > "$COMPILE_TARGET_FILE"
   fi
 
-  DB_VERSION_STR=$(head -n 1 /home/pi/DroneBridge/db_version.txt)
+  DB_VERSION_STR=$(head -n 1 /home/$USER/DroneBridge/db_version.txt)
   if [[ "$CAM" == "0" ]]; then
     echo "Welcome to DroneBridge v"$DB_VERSION_STR" Beta (GND) - "
-    python3 /home/pi/DroneBridge/startup/init_wifi.py -g
+    python3 /home/$USER/DroneBridge/startup/init_wifi.py -g
     sleep 1
-    python3 /home/pi/DroneBridge/startup/start_db_modules.py -g
+    python3 /home/$USER/DroneBridge/startup/start_db_modules.py -g
     start_osd
   else
     echo "Welcome to DroneBridge v"$DB_VERSION_STR" Beta (UAV) - "
-    python3 /home/pi/DroneBridge/startup/init_wifi.py
+    python3 /home/$USER/DroneBridge/startup/init_wifi.py
     sleep 1
-    python3 /home/pi/DroneBridge/startup/start_db_modules.py
+    python3 /home/$USER/DroneBridge/startup/start_db_modules.py
   fi
 }
 
