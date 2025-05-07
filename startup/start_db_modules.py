@@ -12,12 +12,14 @@ from common_helpers import read_dronebridge_config, PI3_WIFI_NIC, HOTSPOT_NIC, g
 from socket import *
 from subprocess import Popen
 
+user = os.environ.get('USER')
+
 COMMON = 'COMMON'
 GROUND = 'GROUND'
 UAV = 'AIR'
 GND_STRING_TAG = 'DroneBridge GND: '
 UAV_STRING_TAG = 'DroneBridge UAV: '
-DRONEBRIDGE_BIN_PATH = os.path.join(os.sep, "home", "$USER", "DroneBridge")
+DRONEBRIDGE_BIN_PATH = os.path.join(os.sep, "home", "ubuntu", "DroneBridge")
 
 
 def parse_arguments():

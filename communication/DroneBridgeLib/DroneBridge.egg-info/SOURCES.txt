@@ -2,6 +2,8 @@ README.md
 setup.py
 DroneBridge/DroneBridge.py
 DroneBridge/__init__.py
+DroneBridge/bpf.py
+DroneBridge/db_helpers.py
 DroneBridge.egg-info/PKG-INFO
 DroneBridge.egg-info/SOURCES.txt
 DroneBridge.egg-info/dependency_links.txt
