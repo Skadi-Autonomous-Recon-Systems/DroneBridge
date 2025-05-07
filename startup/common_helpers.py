@@ -2,7 +2,9 @@ import configparser
 import os
 from pathlib import Path
 
-PATH_CONFIG_FILE = os.path.join(os.sep, "DroneBridge", "DroneBridgeConfig.ini")
+user = os.environ.get('USER')
+
+PATH_CONFIG_FILE = os.path.join(os.sep, "home", "ubuntu" ,"DroneBridge", "DroneBridgeConfig.ini")
 PI3_WIFI_NIC = 'intwifi0'
 HOTSPOT_NIC = 'wifihotspot0'
 

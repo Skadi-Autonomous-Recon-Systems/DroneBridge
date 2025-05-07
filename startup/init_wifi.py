@@ -12,8 +12,10 @@ from subprocess import DEVNULL
 from Chipset import is_atheros_card, is_realtek_card
 from common_helpers import read_dronebridge_config, get_bit_rate, HOTSPOT_NIC, PI3_WIFI_NIC
 
-DRONEBRIDGE_BIN_PATH = os.path.join(os.sep, "home", "$USER", "DroneBridge")
-PATH_DB_VERSION = os.path.join(os.sep, "DroneBridge", "db_version.txt")
+user = os.environ.get('USER')
+
+DRONEBRIDGE_BIN_PATH = os.path.join(os.sep, "home", "ubuntu", "DroneBridge")
+PATH_DB_VERSION = os.path.join(os.sep, "home","ubuntu","DroneBridge", "db_version.txt")
 DRONEBRIDGE_SETTINGS_PATH = os.path.join(os.sep, "DroneBridge")
 
 SUPPORTED_DRIVERS = ['rt2800usb', 'ath9k_htc']
