@@ -101,3 +101,53 @@ There is a nightly branch with the most up to date code! It is not guaranteed th
  * All of the code (especially DroneBridge modules & lib_dbcommon - C or Python) is under the Apache 2 license if not specified otherwise
  * WifiBroadcast legacy code (video, OSD, .profile, hello_video) is licensed as specified or under the GPL v2 license
  * All Kernel drivers/patches are under GPL v2 license
+
+
+## Skadi install
+
+# Rpi
+Pre install:
+```
+sudo apt-get install pkg-config
+```
+
+Install drone bridge
+```
+git clone https://github.com/seeul8er/DroneBridge.git
+cd DroneBridge
+# git checkout nightly
+git submodule init
+git submodule update
+```
+
+Missing dependencies
+```
+pip install pyric
+pip install pycrypto
+pip install evdev
+
+```
+
+Check adapters:
+
+sudo iwconfig
+
+wlx24ec99954f41  IEEE 802.11  ESSID:off/any  
+          Mode:Managed  Access Point: Not-Associated   Tx-Power=30 dBm   
+          Retry short limit:7   RTS thr:off   Fragment thr:off
+          Encryption key:off
+          Power Management:off
+          
+ubuntu@ubuntu-desktop:/home$ sudo iwconfig wlx24ec99954f41 mode monitor
+Error for wireless request "Set Mode" (8B06) :
+    SET failed on device wlx24ec99954f41 ; Device or resource busy.
+ubuntu@ubuntu-desktop:/home$ sudo iwconfig wlx24ec99954f41 mode monitor
+Error for wireless request "Set Mode" (8B06) :
+    SET failed on device wlx24ec99954f41 ; Device or resource busy.
+
+Force monitor mode:
+
+ubuntu@ubuntu-desktop:/home$ sudo apt install aircrack-ng
+
+ubuntu@ubuntu-desktop:/home$ sudo airmon-ng start wlx24ec99954f41
+
